@@ -11,6 +11,7 @@ plugins {
 group = "app.revanced"
 
 repositories {
+    gradlePluginPortal()
     mavenCentral()
     google()
 }
@@ -21,6 +22,7 @@ dependencies {
     implementation(libs.guava)
     implementation(libs.kotlin)
     implementation(libs.kotlin.android)
+    implementation(libs.shadow)
 
     implementation(gradleApi())
     implementation(gradleKotlinDsl())

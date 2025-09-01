@@ -36,6 +36,10 @@ hs_err_pid*
 
 # Generated files
 .idea/**/contentModel.xml
+.idea/**/misc.xml
+.idea/**/vcs.xml
+.idea/**/kotlinc.xml
+.idea/**/.gitignore
 
 # Sensitive or high-churn files
 .idea/**/dataSources/
