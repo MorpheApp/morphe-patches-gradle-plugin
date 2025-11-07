@@ -177,7 +177,7 @@ To build ReVanced Patches Gradle plugin, follow these steps:
 3. Run `./gradlew build` to build the plugin.
 4. Optionally, run `./gradlew publishToMavenLocal` to publish the plugin to your local Maven repository for development.
 
-## 📜 Licence
+## 📜 License
 
 ReVanced Patches Gradle plugin is licensed under the GPLv3 license.
 Please see the [license file](LICENSE) for more
