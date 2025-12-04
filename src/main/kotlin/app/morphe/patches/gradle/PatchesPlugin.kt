@@ -40,7 +40,7 @@ abstract class PatchesPlugin : Plugin<Project> {
     }
 
     /**
-     * Adds the dependencies ReVanced Patcher and SMALI to the project.
+     * Adds the dependencies Morphe Patcher and SMALI to the project.
      * The versions are fetched from the version catalog by the respective project.
      */
     private fun Project.configureDependencies() {
@@ -55,7 +55,7 @@ abstract class PatchesPlugin : Plugin<Project> {
             )
 
             "app.morphe:morphe-patcher"("morphe-patcher")
-            "com.android.tools.smali:smali"("smali")
+            "com.github.iBotPeaches.smali:smali"("smali")
         }
     }
 

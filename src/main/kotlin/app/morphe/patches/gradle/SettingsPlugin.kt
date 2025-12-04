@@ -38,9 +38,17 @@ abstract class SettingsPlugin @Inject constructor(
         dependencyResolutionManagement.repositories.apply {
             mavenCentral()
             google()
+            // Obtain baksmali/smali from source builds - https://github.com/iBotPeaches/smali
+            // Remove when official smali releases come out again.
+            maven { repository ->
+                repository.url = URI("https://jitpack.io")
+                repository.content { content ->
+                    content.includeGroup("com.github.iBotPeaches.smali")
+                }
+            }
             maven { repository ->
                 // A repository must be specified. "registry" is a dummy.
-                repository.url = URI("https://maven.pkg.github.com/revanced/registry")
+                repository.url = URI("https://maven.pkg.github.com/MorpheApp/registry")
                 repository.credentials {
                     it.username = providers.gradleProperty("gpr.user")
                         .orElse(System.getenv("GITHUB_ACTOR")).get()
