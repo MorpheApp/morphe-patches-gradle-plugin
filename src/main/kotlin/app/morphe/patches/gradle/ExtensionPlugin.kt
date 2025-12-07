@@ -45,11 +45,11 @@ abstract class ExtensionPlugin : Plugin<Project> {
             val extensionName = if (extension.name != null) {
                 Path(extension.name!!)
             } else {
-                projectDir.resolveSibling(project.name + ".rve").relativeTo(rootDir).toPath()
+                projectDir.resolveSibling(project.name + ".mpe").relativeTo(rootDir).toPath()
             }
 
             from(dexTask.outputs.files.asFileTree.matching { include("**/*.dex") })
-            into(layout.buildDirectory.dir("revanced/${extensionName.parent.pathString}"))
+            into(layout.buildDirectory.dir("morphe/${extensionName.parent.pathString}"))
 
             rename { extensionName.fileName.toString() }
         }
@@ -58,7 +58,7 @@ abstract class ExtensionPlugin : Plugin<Project> {
             isCanBeResolved = false
             isCanBeConsumed = true
 
-            outgoing.artifact(layout.buildDirectory.dir("revanced")) {
+            outgoing.artifact(layout.buildDirectory.dir("morphe")) {
                 it.builtBy(syncExtensionTask)
             }
         }

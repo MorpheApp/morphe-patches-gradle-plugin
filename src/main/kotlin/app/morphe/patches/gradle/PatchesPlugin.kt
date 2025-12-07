@@ -101,7 +101,7 @@ abstract class PatchesPlugin : Plugin<Project> {
         extensions.configure<SigningExtension>("signing") {
             it.useGpgCmd()
             extensions.getByType(PublishingExtension::class.java).publications
-                .named("ReVancedPatches").configure(it::sign)
+                .named("MorphePatches").configure(it::sign)
         }
     }
 
@@ -146,7 +146,7 @@ abstract class PatchesPlugin : Plugin<Project> {
             }
 
             extension.publications { container ->
-                container.create("ReVancedPatches", MavenPublication::class.java) {
+                container.create("MorphePatches", MavenPublication::class.java) {
                     it.from(components["java"])
 
                     val about = patchesExtension.about

@@ -73,7 +73,7 @@ Create the extension project and configure the `build.gradle.kts` file:
 
 ```kotlin
 extension {
-   name = "extensions/extension.rve"
+   name = "extensions/extension.mpe"
 }
 
 android {
