@@ -11,6 +11,7 @@ plugins {
 group = "app.morphe"
 
 repositories {
+    mavenLocal()
     mavenCentral()
     google()
 }

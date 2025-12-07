@@ -36,6 +36,7 @@ abstract class SettingsPlugin @Inject constructor(
     private fun Settings.configureDependencies() {
         @Suppress("UnstableApiUsage")
         dependencyResolutionManagement.repositories.apply {
+            mavenLocal()
             mavenCentral()
             google()
             // Obtain baksmali/smali from source builds - https://github.com/iBotPeaches/smali
