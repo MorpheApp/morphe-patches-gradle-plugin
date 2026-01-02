@@ -1,8 +1,7 @@
 [versions]
 kotlin = "2.0.21"
 binary-compatibility-validator = "0.18.1"
-#noinspection GradleDependency
-agp = "8.2.2" # 8.3.0 causes Java verifier error: https://github.com/ReVanced/revanced-patches/issues/2818
+agp = "8.13.2"
 guava = "33.5.0-jre"
 
 [libraries]
