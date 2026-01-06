@@ -37,6 +37,9 @@ Applied to extension subprojects by the settings plugin
 > This plugin is a hard fork and was not originally created by Morphe.
 > This plugin functionality may dramatically change at any time.
 
+Morphe Patches Gradle Plugin is based off the prior work of [ReVanced](https://github.com/ReVanced/revanced-patches-gradle-plugin).
+All modifications made by Morphe, along with their dates, can be found in the Git history.
+
 ## 🚀 How to get started
 
 > [!TIP]
