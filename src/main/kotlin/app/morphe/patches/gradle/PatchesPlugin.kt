@@ -148,6 +148,7 @@ abstract class PatchesPlugin : Plugin<Project> {
             extension.publications { container ->
                 container.create("MorphePatches", MavenPublication::class.java) {
                     it.from(components["java"])
+                    it.artifactId = rootProject.name
 
                     val about = patchesExtension.about
                     it.pom { pom ->
