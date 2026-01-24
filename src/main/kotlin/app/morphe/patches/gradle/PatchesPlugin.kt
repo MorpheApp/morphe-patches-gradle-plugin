@@ -6,7 +6,6 @@ import com.android.tools.r8.D8
 import com.android.tools.r8.D8Command
 import com.android.tools.r8.OutputMode
 import com.android.tools.r8.utils.ArchiveResourceProvider
-import kotlinx.validation.BinaryCompatibilityValidatorPlugin
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -30,7 +29,6 @@ abstract class PatchesPlugin : Plugin<Project> {
         project.configureDependencies()
         project.configureKotlin()
         project.configureJava()
-        project.configureBinaryCompatibilityValidator()
         project.configureConsumeExtensions(extension)
         project.configureJarTask(extension)
         project.configurePublishing(extension)
@@ -80,13 +78,6 @@ abstract class PatchesPlugin : Plugin<Project> {
             it.withSourcesJar()
             it.withJavadocJar()
         }
-    }
-
-    /**
-     * Applies the binary compatibility validator plugin to the project, because patches have a public API.
-     */
-    private fun Project.configureBinaryCompatibilityValidator() {
-        pluginManager.apply(BinaryCompatibilityValidatorPlugin::class.java)
     }
 
     /**

@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlin)
-    alias(libs.plugins.binary.compatibility.validator)
     `java-gradle-plugin`
     `maven-publish`
     signing
@@ -18,7 +17,6 @@ repositories {
 
 dependencies {
     implementation(libs.android.application)
-    implementation(libs.binary.compatibility.validator)
     implementation(libs.guava)
     implementation(libs.kotlin)
     implementation(libs.kotlin.android)
