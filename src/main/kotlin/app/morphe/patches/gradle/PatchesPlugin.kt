@@ -6,7 +6,6 @@ import com.android.tools.r8.D8
 import com.android.tools.r8.D8Command
 import com.android.tools.r8.OutputMode
 import com.android.tools.r8.utils.ArchiveResourceProvider
-import kotlinx.validation.BinaryCompatibilityValidatorPlugin
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -14,11 +13,9 @@ import org.gradle.api.UnknownProjectException
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension
-import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.get
-import org.gradle.plugins.signing.SigningExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
@@ -32,11 +29,9 @@ abstract class PatchesPlugin : Plugin<Project> {
         project.configureDependencies()
         project.configureKotlin()
         project.configureJava()
-        project.configureBinaryCompatibilityValidator()
         project.configureConsumeExtensions(extension)
         project.configureJarTask(extension)
         project.configurePublishing(extension)
-        project.configureSigning()
     }
 
     /**
@@ -86,26 +81,6 @@ abstract class PatchesPlugin : Plugin<Project> {
     }
 
     /**
-     * Applies the binary compatibility validator plugin to the project, because patches have a public API.
-     */
-    private fun Project.configureBinaryCompatibilityValidator() {
-        pluginManager.apply(BinaryCompatibilityValidatorPlugin::class.java)
-    }
-
-    /**
-     * Configures the signing plugin to sign the patches publication.
-     */
-    private fun Project.configureSigning() {
-        pluginManager.apply("signing")
-
-        extensions.configure<SigningExtension>("signing") {
-            it.useGpgCmd()
-            extensions.getByType(PublishingExtension::class.java).publications
-                .named("MorphePatches").configure(it::sign)
-        }
-    }
-
-    /**
      * Adds a task to build the DEX file of the patches and adds it to the patches file to use on Android,
      * adds the publishing plugin to the project to publish the patches API and
      * configures the publication with the "about" information from the extension.
@@ -143,34 +118,6 @@ abstract class PatchesPlugin : Plugin<Project> {
             // and the signing plugin to sign the publication, when no repositories are defined.
             extension.repositories.mavenLocal {
                 it.name = "DummyMavenLocal"
-            }
-
-            extension.publications { container ->
-                container.create("MorphePatches", MavenPublication::class.java) {
-                    it.from(components["java"])
-
-                    val about = patchesExtension.about
-                    it.pom { pom ->
-                        pom.name.set(about.name)
-                        pom.description.set(about.description)
-                        pom.url.set(about.website)
-
-                        pom.licenses { licenses ->
-                            licenses.license { license ->
-                                license.name.set(about.license)
-                            }
-                        }
-                        pom.developers { developers ->
-                            developers.developer { developer ->
-                                developer.name.set(about.author)
-                                developer.email.set(about.contact)
-                            }
-                        }
-                        pom.scm { scm ->
-                            scm.url.set(about.source)
-                        }
-                    }
-                }
             }
         }
 
@@ -221,24 +168,24 @@ abstract class PatchesPlugin : Plugin<Project> {
             }
         }
     }
-}
 
-/**
- * Configure the manifest file with the "about" information from the extension.
- */
-private fun Project.configureJarTask(patchesExtension: PatchesExtension) {
-    tasks.withType(Jar::class.java).configureEach {
-        it.archiveExtension.set("mpp")
-        it.manifest.apply {
-            attributes["Name"] = patchesExtension.about.name
-            attributes["Description"] = patchesExtension.about.description
-            attributes["Version"] = project.version.toString()
-            attributes["Timestamp"] = System.currentTimeMillis().toString()
-            attributes["Source"] = patchesExtension.about.source
-            attributes["Author"] = patchesExtension.about.author
-            attributes["Contact"] = patchesExtension.about.contact
-            attributes["Website"] = patchesExtension.about.website
-            attributes["License"] = patchesExtension.about.license
+    /**
+     * Configure the manifest file with the "about" information from the extension.
+     */
+    private fun Project.configureJarTask(patchesExtension: PatchesExtension) {
+        tasks.withType(Jar::class.java).configureEach {
+            it.archiveExtension.set("mpp")
+            it.manifest.apply {
+                attributes["Name"] = patchesExtension.about.name
+                attributes["Description"] = patchesExtension.about.description
+                attributes["Version"] = project.version.toString()
+                attributes["Timestamp"] = System.currentTimeMillis().toString()
+                attributes["Source"] = patchesExtension.about.source
+                attributes["Author"] = patchesExtension.about.author
+                attributes["Contact"] = patchesExtension.about.contact
+                attributes["Website"] = patchesExtension.about.website
+                attributes["License"] = patchesExtension.about.license
+            }
         }
     }
 }
