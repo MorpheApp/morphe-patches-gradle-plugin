@@ -93,7 +93,7 @@ abstract class PatchesPlugin : Plugin<Project> {
             task.dependsOn(tasks["jar"])
 
             task.doLast {
-                val workingDirectory = layout.buildDirectory.dir("revanced").get().asFile.also(File::mkdirs)
+                val workingDirectory = layout.buildDirectory.dir("morphe").get().asFile.also(File::mkdirs)
 
                 val patchesFile = tasks["jar"].outputs.files.first()
                 val classesZipFile = workingDirectory.resolve("classes.zip")
