@@ -1,3 +1,10 @@
+# [1.1.0-dev.1](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.0.1...v1.1.0-dev.1) (2026-01-24)
+
+
+### Features
+
+* Skip publishing to GitHub packages ([#7](https://github.com/MorpheApp/morphe-patches-gradle-plugin/issues/7)) ([6c729ac](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/6c729ac17fd15f533e46d369496616ce371b12c6))
+
 ## [1.0.1](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.0.0...v1.0.1) (2026-01-10)
 
 
