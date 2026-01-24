@@ -1,3 +1,10 @@
+# [1.1.0-dev.2](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.1.0-dev.1...v1.1.0-dev.2) (2026-01-24)
+
+
+### Bug Fixes
+
+* Remove gradle dependency restrictions ([#4](https://github.com/MorpheApp/morphe-patches-gradle-plugin/issues/4)) ([569e54c](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/569e54c970ea3b174404ad1a5ffbe75a6e02def9))
+
 # [1.1.0-dev.1](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.0.1...v1.1.0-dev.1) (2026-01-24)
 
 
