@@ -1,3 +1,11 @@
+## [1.1.1-dev.1](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.1.0...v1.1.1-dev.1) (2026-01-31)
+
+
+### Bug Fixes
+
+* Do not use filters in Maven Repository ([4837696](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/48376961c14ff239824c69ef58aa064790b5a997))
+* Do not use filters in Maven Repository ([#9](https://github.com/MorpheApp/morphe-patches-gradle-plugin/issues/9)) ([2fc0d64](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/2fc0d64121b26fb9a1b2ba9ceee6174264b4caef))
+
 # [1.1.0](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.0.1...v1.1.0) (2026-01-24)
 
 
