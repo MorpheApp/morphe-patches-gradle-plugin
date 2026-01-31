@@ -39,8 +39,6 @@ abstract class SettingsPlugin @Inject constructor(
             mavenLocal()
             mavenCentral()
             google()
-            // Obtain baksmali/smali from source builds - https://github.com/iBotPeaches/smali
-            // Remove when official smali releases come out again.
             maven { repository -> repository.url = URI("https://jitpack.io") }
             maven { repository ->
                 // A repository must be specified. "registry" is a dummy.
