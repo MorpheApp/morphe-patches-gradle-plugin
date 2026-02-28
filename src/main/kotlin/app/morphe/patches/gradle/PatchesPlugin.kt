@@ -185,6 +185,7 @@ abstract class PatchesPlugin : Plugin<Project> {
                 attributes["Contact"] = patchesExtension.about.contact
                 attributes["Website"] = patchesExtension.about.website
                 attributes["License"] = patchesExtension.about.license
+                attributes["Patcher-Version"] = patchesExtension.about.patcherVersion
             }
         }
     }
