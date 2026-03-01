@@ -185,7 +185,14 @@ abstract class PatchesPlugin : Plugin<Project> {
                 attributes["Contact"] = patchesExtension.about.contact
                 attributes["Website"] = patchesExtension.about.website
                 attributes["License"] = patchesExtension.about.license
-                attributes["Patcher-Version"] = patchesExtension.about.patcherVersion
+
+                configurations
+                    .getByName("implementation")
+                    .dependencies
+                    .firstOrNull { it.group == "app.morphe" && it.name == "morphe-patcher" }
+                    ?.version?.let { version ->
+                        attributes["Patcher-Version"] = version
+                    }
             }
         }
     }

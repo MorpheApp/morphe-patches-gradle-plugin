@@ -32,6 +32,5 @@ open class PatchesExtension {
         var contact: String? = null
         var website: String? = null
         var license: String? = null
-        var patcherVersion: String? = null
     }
 }
