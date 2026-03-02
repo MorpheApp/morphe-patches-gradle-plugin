@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.1.1...v1.2.0) (2026-03-02)
+
+
+### Features
+
+* Add patcher version to patches manifest ([#12](https://github.com/MorpheApp/morphe-patches-gradle-plugin/issues/12)) ([c431ebd](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/c431ebd8fc7de354aab1fa52a39def5475f3a9bc))
+
 # [1.2.0-dev.1](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.1.1...v1.2.0-dev.1) (2026-03-02)
 
 
