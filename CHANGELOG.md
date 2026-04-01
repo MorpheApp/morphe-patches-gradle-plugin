@@ -1,3 +1,10 @@
+# [1.3.0-dev.4](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.0-dev.3...v1.3.0-dev.4) (2026-04-01)
+
+
+### Bug Fixes
+
+* Determine which dependencies to package based on module identity rather than by files ([6a2f340](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/6a2f340308a0f13835322a164d7ed3235a6a453f))
+
 # [1.3.0-dev.3](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.0-dev.2...v1.3.0-dev.3) (2026-04-01)
 
 
