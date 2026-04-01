@@ -196,13 +196,26 @@ abstract class PatchesPlugin : Plugin<Project> {
             it.duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
             // Bundle implementation dependencies into the jar, excluding patcher-provided ones.
+            // Compares by module identity (group:name) rather than file identity so that
+            // version differences (e.g. Kotlin stdlib version from the Kotlin plugin vs.
+            // the version transitively provided by morphe-patcher) don't cause provided
+            // dependencies to leak into the jar.
             it.from(provider {
-                val runtimeFiles = configurations.getByName("runtimeClasspath").files
-                val providedFiles = configurations.getByName("patcherProvidedClasspath").files
+                val runtimeConfig = configurations.getByName("runtimeClasspath")
+                val providedConfig = configurations.getByName("patcherProvidedClasspath")
 
-                (runtimeFiles - providedFiles).map { file ->
-                    if (file.isDirectory) file else zipTree(file)
-                }
+                val providedModules = providedConfig.resolvedConfiguration.resolvedArtifacts
+                    .mapTo(mutableSetOf()) { artifact ->
+                        "${artifact.moduleVersion.id.group}:${artifact.moduleVersion.id.name}"
+                    }
+
+                runtimeConfig.resolvedConfiguration.resolvedArtifacts
+                    .filterNot { artifact ->
+                        "${artifact.moduleVersion.id.group}:${artifact.moduleVersion.id.name}" in providedModules
+                    }
+                    .map { artifact ->
+                        if (artifact.file.isDirectory) artifact.file else zipTree(artifact.file)
+                    }
             })
 
             // Exclude files from dependencies that must not be merged into the jar.
