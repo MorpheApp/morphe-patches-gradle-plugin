@@ -5,11 +5,11 @@ import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.tasks.Sync
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.register
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinAndroidPluginWrapper
 import kotlin.io.path.Path
 import kotlin.io.path.pathString
@@ -99,9 +99,10 @@ abstract class ExtensionPlugin : Plugin<Project> {
                     targetCompatibility = JavaVersion.VERSION_17
                 }
 
-                this as ExtensionAware
-                this.extensions.configure<KotlinJvmOptions>("kotlinOptions") { options ->
-                    options.jvmTarget = JavaVersion.VERSION_17.toString()
+                extensions.configure<KotlinAndroidProjectExtension>("kotlin") { kotlin ->
+                    kotlin.compilerOptions {
+                        jvmTarget.set(JvmTarget.JVM_17)
+                    }
                 }
             }
         }
