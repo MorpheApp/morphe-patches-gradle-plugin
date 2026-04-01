@@ -11,6 +11,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.UnknownProjectException
 import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.tasks.SourceSetContainer
@@ -37,13 +38,26 @@ abstract class PatchesPlugin : Plugin<Project> {
     /**
      * Adds the dependencies Morphe Patcher and SMALI to the project.
      * The versions are fetched from the version catalog by the respective project.
+     *
+     * These dependencies are added to a separate "patcherProvided" configuration
+     * because they are provided at runtime by the application that loads the patches.
+     * The "implementation" configuration extends from "patcherProvided" so that these
+     * dependencies are still available for compilation and runtime tasks,
+     * but they can be excluded when bundling dependencies into the patches file.
      */
     private fun Project.configureDependencies() {
+        val patcherProvidedScope = configurations.dependencyScope("patcherProvided").get()
+        configurations.resolvable("patcherProvidedClasspath") {
+            it.extendsFrom(patcherProvidedScope)
+        }
+
         afterEvaluate {
+            configurations.getByName("implementation").extendsFrom(patcherProvidedScope)
+
             val catalog = extensions.getByType(VersionCatalogsExtension::class.java).named("libs")
 
             operator fun String.invoke(versionAlias: String) = dependencies.add(
-                "implementation",
+                "patcherProvided",
                 "$this:" + catalog.findVersion(versionAlias).orElseThrow {
                     IllegalArgumentException("Version with alias $versionAlias not found in version catalog")
                 },
@@ -170,11 +184,27 @@ abstract class PatchesPlugin : Plugin<Project> {
     }
 
     /**
-     * Configure the manifest file with the "about" information from the extension.
+     * Configure the JAR task to bundle implementation dependencies into the patches file
+     * and set the manifest with the "about" information from the extension.
+     *
+     * Dependencies from the "patcherProvided" configuration (Morphe Patcher and SMALI)
+     * are excluded because they are provided at runtime by the application that loads the patches.
      */
     private fun Project.configureJarTask(patchesExtension: PatchesExtension) {
         tasks.withType(Jar::class.java).configureEach {
             it.archiveExtension.set("mpp")
+            it.duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+            // Bundle implementation dependencies into the jar, excluding patcher-provided ones.
+            it.from(provider {
+                val runtimeFiles = configurations.getByName("runtimeClasspath").files
+                val providedFiles = configurations.getByName("patcherProvidedClasspath").files
+
+                (runtimeFiles - providedFiles).map { file ->
+                    if (file.isDirectory) file else zipTree(file)
+                }
+            })
+
             it.manifest.apply {
                 attributes["Name"] = patchesExtension.about.name
                 attributes["Description"] = patchesExtension.about.description
@@ -188,7 +218,7 @@ abstract class PatchesPlugin : Plugin<Project> {
 
                 configurations
                     .getByName("implementation")
-                    .dependencies
+                    .allDependencies
                     .firstOrNull { it.group == "app.morphe" && it.name == "morphe-patcher" }
                     ?.version?.let { version ->
                         attributes["Patcher-Version"] = version
