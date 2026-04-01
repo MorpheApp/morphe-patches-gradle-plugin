@@ -1,3 +1,10 @@
+# [1.3.0-dev.3](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.0-dev.2...v1.3.0-dev.3) (2026-04-01)
+
+
+### Bug Fixes
+
+* Exclude META-INF and module-info.class files ([237af71](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/237af7121cd5f1103fb415607709333ed50bc263))
+
 # [1.3.0-dev.2](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.0-dev.1...v1.3.0-dev.2) (2026-04-01)
 
 
