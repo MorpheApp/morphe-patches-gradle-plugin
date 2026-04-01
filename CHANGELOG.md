@@ -1,3 +1,15 @@
+# [1.3.0-dev.1](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.2.0...v1.3.0-dev.1) (2026-04-01)
+
+
+### Bug Fixes
+
+* Remove deprecated KotlinJvmOptions ([35e501a](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/35e501a3bde612d1ca44f507e84c9cf169fda0c8))
+
+
+### Features
+
+* Bump kotlin version to 2.2.0 ([87470d5](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/87470d54bd2b8b6fa11ad6facd39c00265e5592b))
+
 # [1.2.0](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.1.1...v1.2.0) (2026-03-02)
 
 
