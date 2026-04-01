@@ -1,3 +1,18 @@
+# [1.3.0](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.2.0...v1.3.0) (2026-04-01)
+
+
+### Bug Fixes
+
+* Determine which dependencies to package based on module identity rather than by files ([6a2f340](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/6a2f340308a0f13835322a164d7ed3235a6a453f))
+* Exclude META-INF and module-info.class files ([237af71](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/237af7121cd5f1103fb415607709333ed50bc263))
+* Package patches dependencies into mpp bundle ([bef9ac8](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/bef9ac80ecc36479f47a24d05ba6d89d7a4552c9))
+* Remove deprecated KotlinJvmOptions ([35e501a](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/35e501a3bde612d1ca44f507e84c9cf169fda0c8))
+
+
+### Features
+
+* Bump kotlin version to 2.2.0 ([87470d5](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/87470d54bd2b8b6fa11ad6facd39c00265e5592b))
+
 # [1.3.0-dev.4](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.0-dev.3...v1.3.0-dev.4) (2026-04-01)
 
 
