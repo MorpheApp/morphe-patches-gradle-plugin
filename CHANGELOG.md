@@ -1,3 +1,10 @@
+# [1.3.0-dev.2](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.0-dev.1...v1.3.0-dev.2) (2026-04-01)
+
+
+### Bug Fixes
+
+* Package patches dependencies into mpp bundle ([bef9ac8](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/bef9ac80ecc36479f47a24d05ba6d89d7a4552c9))
+
 # [1.3.0-dev.1](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.2.0...v1.3.0-dev.1) (2026-04-01)
 
 
