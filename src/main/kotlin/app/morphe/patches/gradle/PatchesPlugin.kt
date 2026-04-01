@@ -205,6 +205,18 @@ abstract class PatchesPlugin : Plugin<Project> {
                 }
             })
 
+            // Exclude files from dependencies that must not be merged into the jar.
+            it.exclude(
+                "META-INF/versions/*/module-info.class",
+                "META-INF/*.SF",
+                "META-INF/*.DSA",
+                "META-INF/*.RSA",
+                "META-INF/MANIFEST.MF",
+                "META-INF/LICENSE*",
+                "META-INF/NOTICE*",
+                "**/module-info.class",
+            )
+
             it.manifest.apply {
                 attributes["Name"] = patchesExtension.about.name
                 attributes["Description"] = patchesExtension.about.description
