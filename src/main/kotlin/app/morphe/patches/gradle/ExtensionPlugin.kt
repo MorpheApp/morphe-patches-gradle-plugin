@@ -8,8 +8,6 @@ import org.gradle.api.Project
 import org.gradle.api.tasks.Sync
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.register
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import kotlin.io.path.Path
 import kotlin.io.path.pathString
 
@@ -97,11 +95,6 @@ abstract class ExtensionPlugin : Plugin<Project> {
                     targetCompatibility = JavaVersion.VERSION_17
                 }
 
-                extensions.configure<KotlinAndroidProjectExtension>("kotlin") { kotlin ->
-                    kotlin.compilerOptions {
-                        jvmTarget.set(JvmTarget.JVM_17)
-                    }
-                }
             }
         }
     }
