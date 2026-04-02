@@ -65,7 +65,7 @@ abstract class SettingsPlugin @Inject constructor(
             objectFactory.fileTree().from(rootDir.resolve(extensionsProjectPath)).matching {
                 it.include("**/build.gradle.kts")
             }.forEach {
-                include(it.relativeTo(rootDir).toPath().joinToString(":"))
+                include(it.parentFile.relativeTo(rootDir).toPath().joinToString(":"))
             }
         }
 
