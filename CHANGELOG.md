@@ -3,6 +3,14 @@
 
 ### Bug Fixes
 
+* Remove org.jetbrains.kotlin.android plugin from extensions ([4c26439](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/4c26439cdbc0cc4b1f3062571e67e8f19e39f946))
+* Remove org.jetbrains.kotlin.android plugin from extensions ([1bf5aa2](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/1bf5aa2eeb02074438f8aed095d127825cef07f6))
+
+## [1.3.1-dev.2](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.1-dev.1...v1.3.1-dev.2) (2026-04-02)
+
+
+### Bug Fixes
+
 * Remove org.jetbrains.kotlin.android plugin from extensions ([1bf5aa2](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/1bf5aa2eeb02074438f8aed095d127825cef07f6))
 
 ## [1.3.1-dev.1](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.0...v1.3.1-dev.1) (2026-04-02)
