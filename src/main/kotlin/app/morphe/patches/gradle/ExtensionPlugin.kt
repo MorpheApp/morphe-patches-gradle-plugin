@@ -10,7 +10,6 @@ import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.register
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
-import org.jetbrains.kotlin.gradle.plugin.KotlinAndroidPluginWrapper
 import kotlin.io.path.Path
 import kotlin.io.path.pathString
 
@@ -70,7 +69,6 @@ abstract class ExtensionPlugin : Plugin<Project> {
     private fun Project.configureAndroid(settingsExtensionProvider: SettingsExtensionProvider) {
         pluginManager.apply {
             apply(AppPlugin::class.java)
-            apply(KotlinAndroidPluginWrapper::class.java)
         }
 
         extensions.configure(BaseAppModuleExtension::class.java) {
