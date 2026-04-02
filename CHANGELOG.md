@@ -1,3 +1,10 @@
+## [1.3.1-dev.3](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.1-dev.2...v1.3.1-dev.3) (2026-04-02)
+
+
+### Bug Fixes
+
+* Compatibility with AGP 9.x ([de8c1f2](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/de8c1f281c7aaa50b327e96d068a7c1c688bd941))
+
 ## [1.3.1-dev.2](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.1-dev.1...v1.3.1-dev.2) (2026-04-02)
 
 
