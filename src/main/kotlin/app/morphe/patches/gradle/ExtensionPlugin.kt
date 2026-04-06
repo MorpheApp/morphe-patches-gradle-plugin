@@ -54,7 +54,7 @@ abstract class ExtensionPlugin : Plugin<Project> {
         pluginManager.apply("com.android.application")
         extensions.configure(ApplicationExtension::class.java) {
             it.apply {
-                compileSdk = 34
+                compileSdk = 36
                 namespace = settingsExtensionProvider.parameters.defaultNamespace
                 defaultConfig {
                     minSdk = 23
