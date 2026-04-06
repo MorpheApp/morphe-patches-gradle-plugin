@@ -19,7 +19,6 @@ dependencies {
     implementation(libs.android.application)
     implementation(libs.guava)
     implementation(libs.kotlin)
-    implementation(libs.kotlin.android)
 
     implementation(gradleApi())
     implementation(gradleKotlinDsl())
