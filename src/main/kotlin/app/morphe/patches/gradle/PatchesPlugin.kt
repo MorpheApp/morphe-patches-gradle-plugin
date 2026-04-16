@@ -64,7 +64,7 @@ abstract class PatchesPlugin : Plugin<Project> {
             )
 
             "app.morphe:morphe-patcher"("morphe-patcher")
-            "com.github.iBotPeaches.smali:smali"("smali")
+            "com.github.MorpheApp.smali:smali"("smali")
         }
     }
 

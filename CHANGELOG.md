@@ -1,3 +1,17 @@
+## [1.3.2-dev.2](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.2-dev.1...v1.3.2-dev.2) (2026-04-06)
+
+
+### Bug Fixes
+
+* Update smali repo ([53ce4a1](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/53ce4a151b5674b70bfb8d4e2852270060c1ae33))
+
+## [1.3.2-dev.1](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.1...v1.3.2-dev.1) (2026-04-06)
+
+
+### Bug Fixes
+
+* Bump Android compileSdk to 36 ([be0bea9](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/be0bea9b16a9b44b7a71c7f44d8ac68e5a7189cb))
+
 ## [1.3.1](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.0...v1.3.1) (2026-04-06)
 
 
