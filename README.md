@@ -51,7 +51,7 @@ Add the following to the `settings.gradle.kts` file:
 ```kotlin
 pluginManagement {
     repositories {
-        `mavenLocal()`
+        mavenLocal()
         gradlePluginPortal()
         google()
         maven {
