@@ -6,6 +6,7 @@ import com.android.tools.r8.D8
 import com.android.tools.r8.D8Command
 import com.android.tools.r8.OutputMode
 import com.android.tools.r8.utils.ArchiveResourceProvider
+import org.gradle.api.GradleException
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -21,6 +22,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 import java.io.File
+import java.util.Properties
 
 @Suppress("unused")
 abstract class PatchesPlugin : Plugin<Project> {
@@ -112,12 +114,29 @@ abstract class PatchesPlugin : Plugin<Project> {
                 val patchesFile = tasks["jar"].outputs.files.first()
                 val classesZipFile = workingDirectory.resolve("classes.zip")
 
-                D8Command.builder()
+                val d8Builder = D8Command.builder()
                     .addProgramResourceProvider(ArchiveResourceProvider.fromArchive(patchesFile.toPath(), true))
                     .setMode(CompilationMode.RELEASE)
                     .setOutput(classesZipFile.toPath(), OutputMode.DexIndexed)
-                    .build()
-                    .let(D8::run)
+
+                // Add android.jar as a library to D8 to allow desugaring.
+                val androidJar = getAndroidJar() ?: throw GradleException("Could not find android.jar")
+                d8Builder.addLibraryFiles(androidJar.toPath())
+
+                // Add the compile and runtime classpath to D8 to allow desugaring project dependencies.
+                val runtimeClasspath = configurations.getByName("runtimeClasspath")
+                val compileClasspath = configurations.getByName("compileClasspath")
+
+                val classpathFiles = (runtimeClasspath.files + compileClasspath.files)
+                    .filter { it.exists() && it != patchesFile }
+                    .distinctBy { it.absolutePath }
+                    .map { it.toPath() }
+
+                if (classpathFiles.isNotEmpty()) {
+                    d8Builder.addClasspathFiles(classpathFiles)
+                }
+
+                d8Builder.build().let(D8::run)
 
                 ZFile.openReadWrite(patchesFile).use { zFile ->
                     zFile.mergeFrom(ZFile.openReadOnly(classesZipFile)) { false }
@@ -250,5 +269,45 @@ abstract class PatchesPlugin : Plugin<Project> {
                     }
             }
         }
+    }
+
+    /**
+     * Tries to find the android.jar in the Android SDK.
+     */
+    private fun Project.getAndroidJar(): File? {
+        val sdkDir = getAndroidSdkDir() ?: return null
+        val platformsDir = File(sdkDir, "platforms")
+        if (!platformsDir.exists()) return null
+
+        // Find the latest platform version.
+        return platformsDir.listFiles()
+            ?.filter { it.isDirectory && File(it, "android.jar").exists() }
+            ?.maxByOrNull { it.name }
+            ?.let { File(it, "android.jar") }
+    }
+
+    /**
+     * Tries to find the Android SDK directory.
+     */
+    private fun Project.getAndroidSdkDir(): File? {
+        // 1. Try sdk.dir in local.properties
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            val properties = Properties()
+            localPropertiesFile.inputStream().use { properties.load(it) }
+            properties.getProperty("sdk.dir")?.let { return File(it) }
+        }
+
+        // 2. Try environment variables
+        System.getenv("ANDROID_HOME")?.let { return File(it) }
+        System.getenv("ANDROID_SDK_ROOT")?.let { return File(it) }
+
+        // 3. Try default locations
+        val homeDir = System.getProperty("user.home")
+        val defaultLocations = listOf(
+            File(homeDir, "Library/Android/sdk"), // macOS
+            File(homeDir, "Android/Sdk"), // Linux
+        )
+        return defaultLocations.firstOrNull { it.exists() }
     }
 }
