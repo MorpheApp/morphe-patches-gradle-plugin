@@ -1,3 +1,10 @@
+## [1.3.3-dev.1](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.2...v1.3.3-dev.1) (2026-07-06)
+
+
+### Bug Fixes
+
+* Provide classpath and library providers to D8 for desugaring ([4419cbf](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/4419cbff87f3125635fa370d829ad0bd61fa3128))
+
 ## [1.3.2](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.1...v1.3.2) (2026-04-16)
 
 
