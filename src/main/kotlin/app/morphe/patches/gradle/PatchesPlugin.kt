@@ -1,3 +1,11 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-patches-gradle-plugin
+ *
+ * Original hard forked code:
+ * https://github.com/ReVanced/revanced-patches-gradle-plugin/commit/b935371b88743e3e15dceb502ab634d99212d380
+ */
+
 package app.morphe.patches.gradle
 
 import com.android.tools.build.apkzlib.zip.ZFile
