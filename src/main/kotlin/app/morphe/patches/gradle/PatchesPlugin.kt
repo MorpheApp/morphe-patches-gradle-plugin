@@ -126,10 +126,12 @@ abstract class PatchesPlugin : Plugin<Project> {
                     .addProgramResourceProvider(ArchiveResourceProvider.fromArchive(patchesFile.toPath(), true))
                     .setMode(CompilationMode.RELEASE)
                     .setOutput(classesZipFile.toPath(), OutputMode.DexIndexed)
+                    .setMinApiLevel(26)
 
-                // Add android.jar as a library to D8 to allow desugaring.
-                val androidJar = getAndroidJar() ?: throw GradleException("Could not find android.jar")
-                d8Builder.addLibraryFiles(androidJar.toPath())
+                // Add android.jar as a library to D8 to allow desugaring if it is found.
+                getAndroidJar()?.let {
+                    d8Builder.addLibraryFiles(it.toPath())
+                }
 
                 // Add the compile and runtime classpath to D8 to allow desugaring project dependencies.
                 val runtimeClasspath = configurations.getByName("runtimeClasspath")
