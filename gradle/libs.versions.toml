@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.2.21"
-agp = "9.1.0"
+agp = "9.2.1"
 guava = "33.5.0-jre"
 
 [libraries]
