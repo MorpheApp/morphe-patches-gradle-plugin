@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.3...v1.3.4) (2026-08-22)
+
+
+### Bug Fixes
+
+* Update to Kotlin 2.4 ([#32](https://github.com/MorpheApp/morphe-patches-gradle-plugin/issues/32)) ([d824758](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/d82475877ca16698f0d0c5cf6d5ad362e69487c1))
+
 ## [1.3.4-dev.1](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.3...v1.3.4-dev.1) (2026-08-21)
 
 
