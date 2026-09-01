@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.4.10"
 agp = "9.1.0"
-guava = "33.5.0-jre"
+guava = "33.7.1-jre"
 
 [libraries]
 kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
