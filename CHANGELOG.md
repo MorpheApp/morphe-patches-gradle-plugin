@@ -1,3 +1,15 @@
+# [2.0.0-dev.1](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.4...v2.0.0-dev.1) (2026-10-22)
+
+
+### Features
+
+* Change to 2.0 release number ([ca25e36](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/ca25e366b466f7ba057dc100c71b33a4bc4524b1))
+
+
+### BREAKING CHANGES
+
+* Version was changed to 2.0 to match Patcher version for less confusion
+
 ## [1.3.4](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.3...v1.3.4) (2026-08-22)
 
 
