@@ -106,6 +106,7 @@ abstract class PatchesPlugin : Plugin<Project> {
 
     /**
      * Adds a task to build the DEX file of the patches and adds it to the patches file to use on Android,
+     * signs the patches file if a signing key is set, adds a task to create a signing key,
      * adds the publishing plugin to the project to publish the patches API and
      * configures the publication with the "about" information from the extension.
      */
@@ -151,6 +152,25 @@ abstract class PatchesPlugin : Plugin<Project> {
                 ZFile.openReadWrite(patchesFile).use { zFile ->
                     zFile.mergeFrom(ZFile.openReadOnly(classesZipFile)) { false }
                 }
+
+                if (!BundleSigning.sign(patchesFile, rootDir) &&
+                    rootDir.resolve(BundleSigning.PUBLIC_KEY_FILE).exists()
+                ) {
+                    logger.warn("No signing key is set, ${patchesFile.name} is not signed")
+                }
+            }
+        }
+
+        tasks.register("generateSigningKey") { task ->
+            task.description = "Creates the key pair that signs the patches file."
+            task.group = "build"
+
+            task.doLast {
+                BundleSigning.generateKey(rootDir)
+                logger.lifecycle(
+                    "Created ${BundleSigning.PUBLIC_KEY_FILE} to commit and ${BundleSigning.PRIVATE_KEY_FILE} " +
+                        "to keep private, see the README of the patches template"
+                )
             }
         }
 
