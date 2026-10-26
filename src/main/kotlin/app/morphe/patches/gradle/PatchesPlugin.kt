@@ -14,7 +14,6 @@ import com.android.tools.r8.D8
 import com.android.tools.r8.D8Command
 import com.android.tools.r8.OutputMode
 import com.android.tools.r8.utils.ArchiveResourceProvider
-import org.gradle.api.GradleException
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -55,6 +54,7 @@ abstract class PatchesPlugin : Plugin<Project> {
      * dependencies are still available for compilation and runtime tasks,
      * but they can be excluded when bundling dependencies into the patches file.
      */
+    @Suppress("UnstableApiUsage")
     private fun Project.configureDependencies() {
         val patcherProvidedScope = configurations.dependencyScope("patcherProvided").get()
         configurations.resolvable("patcherProvidedClasspath") {
@@ -93,7 +93,7 @@ abstract class PatchesPlugin : Plugin<Project> {
 
     /**
      * Configures the Java plugin with Java 11 as the target because Java 11 is the target on Android.
-     * Additionally, adds sources and javadoc JARs, as patches have a public API.
+     * Additionally, adds sources and Javadoc JARs, as patches have a public API.
      */
     private fun Project.configureJava() {
         extensions.configure<JavaPluginExtension>("java") {
@@ -105,10 +105,10 @@ abstract class PatchesPlugin : Plugin<Project> {
     }
 
     /**
-     * Adds a task to build the DEX file of the patches and adds it to the patches file to use on Android,
-     * signs the patches file if a signing key is set, adds a task to create a signing key,
-     * adds the publishing plugin to the project to publish the patches API and
-     * configures the publication with the "about" information from the extension.
+     * Adds a task that compiles the patches to DEX, adds it to the patches file to use on Android
+     * and signs the patches file if a signing key is set.
+     * Adds a task to create that signing key.
+     * Adds the publishing plugin to publish the patches API, configured with the "about" information.
      */
     private fun Project.configurePublishing(patchesExtension: PatchesExtension) {
         val buildAndroid = tasks.register("buildAndroid") { task ->
@@ -194,6 +194,7 @@ abstract class PatchesPlugin : Plugin<Project> {
     /**
      * Configures the project to consume the extension artifacts and add them to the resources of the patches project.
      */
+    @Suppress("UnstableApiUsage")
     private fun Project.configureConsumeExtensions(patchesExtension: PatchesExtension) {
         val extensionsProject = try {
             project(patchesExtension.extensionsProjectPath ?: return)
@@ -293,7 +294,7 @@ abstract class PatchesPlugin : Plugin<Project> {
                 configurations
                     .getByName("implementation")
                     .allDependencies
-                    .firstOrNull { it.group == "app.morphe" && it.name == "morphe-patcher" }
+                    .firstOrNull { dependency -> dependency.group == "app.morphe" && dependency.name == "morphe-patcher" }
                     ?.version?.let { version ->
                         attributes["Patcher-Version"] = version
                     }
