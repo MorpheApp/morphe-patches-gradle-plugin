@@ -105,6 +105,14 @@ android {
 > [!NOTE]
 > By default, the plugin expects extension projects to be under the `extensions` directory.
 
+Optionally, sign the patches file so Morphe can tell a changed or swapped release apart from yours:
+
+1. Run `./gradlew generateSigningKey` to create `morphe-signing.pub` and `morphe-signing.key` in the project directory.
+2. Commit `morphe-signing.pub`. Keep `morphe-signing.key` out of the repository and somewhere safe.
+3. Set the content of `morphe-signing.key` as the `MORPHE_SIGNING_KEY` environment variable of release builds.
+
+`buildAndroid` signs the patches file with the key from `MORPHE_SIGNING_KEY`, or from `morphe-signing.key` if the variable is not set.
+
 ## 📚 Everything else
 
 ### 🛠️ Building

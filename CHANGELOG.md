@@ -1,3 +1,10 @@
+# [2.1.0-dev.1](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v2.0.0...v2.1.0-dev.1) (2026-10-26)
+
+
+### Features
+
+* Sign the patches file with a signing key ([642911a](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/642911a20e9dc7c9f68dc1dc225534c51cbe0f48))
+
 # [2.0.0](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v1.3.4...v2.0.0) (2026-10-22)
 
 
