@@ -121,3 +121,6 @@ gradle-app.setting
 
 # Dependency directories
 node_modules/
+
+# IDE project files
+.idea/

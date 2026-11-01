@@ -18,6 +18,7 @@ repositories {
 dependencies {
     implementation(libs.android.application)
     implementation(libs.guava)
+    implementation(libs.bcprov)
     implementation(libs.kotlin)
 
     implementation(gradleApi())
