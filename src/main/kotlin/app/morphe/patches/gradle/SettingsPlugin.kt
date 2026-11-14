@@ -45,9 +45,9 @@ abstract class SettingsPlugin @Inject constructor(
                 repository.url = URI("https://maven.pkg.github.com/MorpheApp/registry")
                 repository.credentials {
                     it.username = providers.gradleProperty("gpr.user")
-                        .orElse(System.getenv("GITHUB_ACTOR")).get()
+                        .orElse(providers.environmentVariable("GITHUB_ACTOR")).orNull
                     it.password = providers.gradleProperty("gpr.key")
-                        .orElse(System.getenv("GITHUB_TOKEN")).get()
+                        .orElse(providers.environmentVariable("GITHUB_TOKEN")).orNull
                 }
             }
         }
