@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v2.1.0...v2.1.1) (2026-11-15)
+
+
+### Bug Fixes
+
+* Use lazy environment variable providers for GitHub Packages credentials ([3aa8257](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/3aa8257f8ad6cd9108547486296d647f6888cbae)), closes [#50](https://github.com/MorpheApp/morphe-patches-gradle-plugin/issues/50)
+
 ## [2.1.1-dev.1](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v2.1.0...v2.1.1-dev.1) (2026-11-14)
 
 
