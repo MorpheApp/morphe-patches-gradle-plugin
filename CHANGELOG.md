@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v2.1.1...v2.1.2) (2026-11-23)
+
+
+### Bug Fixes
+
+* Copy extensions with processResources to fix IDE sync ([#51](https://github.com/MorpheApp/morphe-patches-gradle-plugin/issues/51)) ([80a26c2](https://github.com/MorpheApp/morphe-patches-gradle-plugin/commit/80a26c2ae8e3dee06f18969a65bce8ab24dac4aa))
+
 ## [2.1.2-dev.1](https://github.com/MorpheApp/morphe-patches-gradle-plugin/compare/v2.1.1...v2.1.2-dev.1) (2026-11-23)
 
 
