@@ -22,9 +22,9 @@ import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension
-import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.get
+import org.gradle.language.jvm.tasks.ProcessResources
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
@@ -226,10 +226,8 @@ abstract class PatchesPlugin : Plugin<Project> {
             }
         }
 
-        extensions.configure<SourceSetContainer>("sourceSets") { sources ->
-            sources.named("main") { main ->
-                main.resources.srcDir(extensionsConfiguration)
-            }
+        tasks.named("processResources", ProcessResources::class.java) { task ->
+            task.from(extensionsConfiguration)
         }
     }
 
